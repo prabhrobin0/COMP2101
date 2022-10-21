@@ -1,19 +1,20 @@
 #!/bin/bash
-#Scripting Lab 1
-#Bash Assignment
-echo 'Hostname'
-echo 'pc200507913'
-#system information command
-hostnamectl
-#ipv4 address command
-echo 'ipv4 address'
+
+# Data
+DISKFREE=$(df -h / | grep "dev/sda" | awk '{print $4}')
+HOST=$(hostname --FQDN)
+    
+OSNV=$(hostnamectl | grep -h "Operating System" | awk '{print $3" "$4" "$5}')
+
+IPAD=$(hostname -i)
+       
 
 
-ip a s ens33 | grep -w inet | awk '{print $2}'
-
-#for checking available and total space
-df
-
-exit
-#End of the script
-
+# Data in template provided
+echo "Report for myvm"
+echo "==============="
+echo "FQDN: $HOST"
+echo "Operating System name and version: $OSNV"
+echo "IP Address: $IPAD" 
+echo "Root Filesystem Free Space: $DISKFREE"
+echo "==============="
